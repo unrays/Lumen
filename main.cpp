@@ -39,21 +39,17 @@ namespace nex {
         return static_cast<T&&>(t);
     }
 
+    //faire des structs a un moment donné
+
     template<typename T>
-    class shared_ptr_allocator {
-        static constexpr unsigned int NUM_ROWS = 64;
-    private:
-        //faire une jagged array, index = nombre de propriétaires et lautre sont un tableau de ptr
-        //pas adapté pour l'instant masi peut etre utile
-
-
+    class weak_ptr {
     public:
 
-    };
+    protected:
 
-    /*static struct shared_ref_counter {
-        unsigned int* _refCountArr[];
-    };*/
+    private:
+
+    };
 
     template<typename T>
     class shared_ptr {
@@ -86,7 +82,7 @@ namespace nex {
             NEX_LOG("[~shared_ptr] Destroying the shared pointer");
 
             if (--(*_refCount) == 0) {
-                NEX_LOG("[~shared_ptr] Destroying the reference of pointer");
+                NEX_LOG("[~shared_ptr] Refcount at 0, Destroying the shared value");
                 delete _refCount;
                 delete _raw;
             }
@@ -112,9 +108,24 @@ namespace nex {
             return *this;
         }
 
-        //en gros, quand on a un operateur=, on passe la reference du refcount
-        //et on fait if (refcount != 0) dans le destructeur jusqu'à ce qu'il soit
-        //à zéro et qu'on le delete; quand meme faire this._raw = nullptr;
+        #ifndef __INTELLISENCE__
+            T* operator->() { return _raw; }
+            const T* operator->() const { return _raw; }
+            T& operator*() { return *_raw; }
+            T* get() const { return _raw; }
+        #else
+            T* get() const { return nullptr; }
+        #endif
+
+        shared_ptr(const shared_ptr& other) noexcept {
+            NEX_LOG("[shared_ptr] Copying shared_ptr values to a new shared_ptr");
+
+            _refCount = other._refCount;
+            _raw = other._raw;
+
+            if (_refCount)
+                ++(*_refCount);
+        }
     };
 
 
@@ -144,6 +155,13 @@ namespace nex {
         ~scoped_ptr(void) {
             NEX_LOG("[~scoped_ptr] Destroying the smart pointer");
             delete _raw; _raw = nullptr;
+        }
+
+        scoped_ptr<T>& operator=(scoped_ptr<T>&& other) {
+            _raw = other._raw;
+            other._raw = nullptr;
+
+            return *this;
         }
 
         #ifndef __INTELLISENCE__
@@ -192,26 +210,52 @@ int main() {
     //auto objPtr = Pointer<Object>;
     //make unique est comme une factory
 
-    auto a = nex::make_scoped_ptr<Object>();
-    auto b = nex::make_scoped_ptr<Object>(10, 10);
+    //auto a = nex::make_scoped_ptr<Object>();
+    //auto b = nex::make_scoped_ptr<Object>(10, 10);
 
+
+    /*
     nex::scoped_ptr<int> c = nex::make_scoped_ptr<int>(10);
+    nex::scoped_ptr<int> d = nex::make_scoped_ptr<int>(50);
+    //b->test();
 
-    b->test();
-
-    nex::scoped_ptr<int> d = nex::move(c);
     nex::scoped_ptr<int> e = nex::move(d);
 
-    nex::shared_ptr<int> f = nex::make_shared_ptr<int>(50);
-    nex::shared_ptr<int> g = nex::make_shared_ptr<int>(20);
+    std::cout << *(e.get()) << std::endl;
 
+    e = nex::move(c);
+
+    std::cout << *(e.get()) << std::endl;
 
     if (c.get() == nullptr)
+        std::cout << "C is equal to nullptr" << std::endl;
+
+    */
+
+    //nex::shared_ptr<int> f = nex::make_shared_ptr<int>(50);
+
+
+
+
+    nex::shared_ptr<int> g = nex::make_shared_ptr<int>(20);
+
+    nex::shared_ptr<int> h = nex::make_shared_ptr<int>(40);
+
+    h = g;
+
+    auto i = nex::make_shared_ptr<Object>();
+
+    i->test();
+
+
+
+
+    /*if (c.get() == nullptr)
         std::cout << "C rawptr is equal to nullptr" << std::endl;
     if (d.get() == nullptr)
-        std::cout << "D rawptr is equal to nullptr" << std::endl;
+        std::cout << "D rawptr is equal to nullptr" << std::endl;*/
 
-    //auto b = std::make_unique<Object>(42, "foo");
+
 
     auto ptr = nex::make_ptr<int>(42);
     std::cout << *ptr << std::endl; // prints 42
