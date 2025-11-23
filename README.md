@@ -21,13 +21,13 @@ Experimental pointer for those who enjoy living on the edge of memory safety.
 #define ENABLE_FEATURE_X
 
 #ifdef NEX_DEBUG
-#ifdef NEX_VERBOSE_LOG
-#define NEX_LOG(msg) std::cout << "[Verbose]" << msg << std::endl
+    #ifdef NEX_VERBOSE_LOG
+        #define NEX_LOG(msg) std::cout << "[Verbose]" << msg << std::endl
+    #else
+        #define NEX_LOG(msg) std::cout << msg << std::endl
+    #endif
 #else
-#define NEX_LOG(msg) std::cout << msg << std::endl
-#endif
-#else
-#define NEX_LOG(msg)
+    #define NEX_LOG(msg)
 #endif
 
 namespace nex {
