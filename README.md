@@ -4,6 +4,7 @@ Experimental pointer for those who enjoy living on the edge of memory safety.
 *Just trying to make it look like std::unique_ptr… but without all the polish.*
 *Handmade, experimental, occasionally smart, definitely honest.*
 
+*A big shout-out to rvalues and lvalues in the chat.* 
 *I did this this morning in 2 hours for fun on this Saturday, November 22, 2025 :)*
 ```cpp
 // Copyright (c) October 2025 Félix-Olivier Dumas. All rights reserved.
