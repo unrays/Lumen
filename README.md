@@ -9,7 +9,8 @@ Experimental pointer for those who enjoy living on the edge of memory safety.
 *A big shout-out to rvalues and lvalues in the chat.* 
 
 *I did this this morning in 2 hours for fun on this Saturday, November 22, 2025 :)*
-*+2 hours on this Sunday, November 23, 2025 *
+
+*+2 hours on this Sunday, November 23, 2025*
 ```cpp
 // Copyright (c) November 2025 Félix-Olivier Dumas. All rights reserved.
 // Licensed under the terms described in the LICENSE file
