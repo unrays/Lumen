@@ -4,6 +4,8 @@ Experimental pointer for those who enjoy living on the edge of memory safety.
 *Just trying to make it look like std::unique_ptr… but without all the polish.*
 *Handmade, experimental, occasionally smart, definitely honest.*
 
+*It's far from finished, and it will likely remain so indefinitely. Rewriting smart pointers is a monumental task, and I don't claim to be able to code it with my current experience. I'm simply curious and I enjoy exploring things that fascinate me!*
+
 *A big shout-out to rvalues and lvalues in the chat.* 
 
 *I did this this morning in 2 hours for fun on this Saturday, November 22, 2025 :)*
