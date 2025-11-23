@@ -10,6 +10,9 @@ Experimental pointer for those who enjoy living on the edge of memory safety.
 
 *I did this this morning in 2 hours for fun on this Saturday, November 22, 2025 :)*
 ```cpp
+// Copyright (c) November 2025 Félix-Olivier Dumas. All rights reserved.
+// Licensed under the terms described in the LICENSE file
+
 #include <iostream>
 
 #define NEX_DEBUG
