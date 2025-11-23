@@ -99,6 +99,9 @@ int main() {
 
     b->test();
 
+    auto ptr = nex::make_ptr<int>(42);
+    std::cout << *ptr << std::endl; // prints 42
+
 
 
     //auto b = std::make_unique<Object>(42, "foo");
