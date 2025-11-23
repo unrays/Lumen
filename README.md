@@ -94,20 +94,11 @@ int main() {
 
     auto a = nex::make_ptr<Object>();
     auto b = nex::make_ptr<Object>(10, 10);
+    b->test();
 
     auto c = nex::make_ptr<int>(10);
 
-    b->test();
-
     auto ptr = nex::make_ptr<int>(42);
     std::cout << *ptr << std::endl; // prints 42
-
-
-
-    //auto b = std::make_unique<Object>(42, "foo");
-
-    
-
-
 }
 ```
